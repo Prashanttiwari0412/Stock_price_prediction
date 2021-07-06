@@ -4,7 +4,7 @@ import pickle
 import pandas as pd
 import numpy as np
 
-app=Flask(__name__)
+app=Flask(__name__,template_folder='templates')
 cors=CORS(app)
 file_path= r'C:\Notebook\Technocolab intern\SVM_Linear_model.pkl'
 model=pickle.load(open(file_path,'rb'))
@@ -33,4 +33,4 @@ def predict():
 
 
 if __name__=='__main__':
-    app.run(debug=True)
+    app.run()
