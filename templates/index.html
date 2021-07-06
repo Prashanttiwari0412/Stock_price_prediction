@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Technocolabs | Stocks Price Prediction</title>
+    <style>
+      :root {
+    --primary-color: #3457D5;
+    --primary-white: #ffffff;
+    background-image: url(https://drive.google.com/file/d/13mFXtSTS_kLY039cxjJt92j7n4QzEmK-/view?usp=sharing);
+}
+  
+@font-face {
+    font-family: font;
+    src: url(../fonts/font.otf);
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    font-family: 'font', sans-serif;
+    background-image: url(http://www.ruleoneinvesting.com/wp-content/uploads/2014/11/stock-market-trends-what-causes-stock-prices-to-change.jpg);
+}
+
+.container{
+    height: 100vh;
+    background-color: var(--primary-color);
+    background-image: url(http://www.ruleoneinvesting.com/wp-content/uploads/2014/11/stock-market-trends-what-causes-stock-prices-to-change.jpg);
+    
+}
+
+.inner-container{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.form-container{
+    width: 800px;
+    background-color: var(--primary-white);
+    border-radius: 3px;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    overflow: hidden;
+}
+
+.left{
+    background-image: url(https://avatars.githubusercontent.com/u/50095209?v=4);
+    background-size: cover;
+    border-right: 1px solid whitesmoke;
+    background-color: #f1f1f1;
+}
+
+.right{
+    padding: 30px;
+}
+
+.input-container{
+    display: grid;
+    grid-template-columns: 47% 47%;
+    grid-column-gap: 6%;
+    grid-row-gap: 15px;
+    margin-bottom: 15px;
+}
+
+.form-control{
+    width: 100%;
+    padding: 12px;
+    border: 2px solid whitesmoke;
+    outline: none;
+    border-radius: 3px;
+    transition: border .5s linear;
+}
+select.select-control{
+    width: 100%;
+    padding: 12px 10px;
+    border: 2px solid whitesmoke;
+    outline: none;
+    border-radius: 3px;
+    transition: border .5s linear;
+}
+
+input.select-control{
+    width: 100%;
+    padding: 10px;
+    border: 2px solid whitesmoke;
+    outline: none;
+    border-radius: 3px;
+    transition: border .5s linear;
+}
+
+.form-control:focus, .select-control:focus{
+    border: 2px solid var(--primary-color);
+}
+
+.input-container p{
+    margin-bottom: 5px;
+}
+
+.button{
+    outline: none;
+    padding: 13px 60px;
+    border: none;
+    background-color: var(--primary-color);
+    border-radius: 3px;
+    color: var(--primary-white);
+    font-family: 'font', sans-serif;
+    cursor: pointer;
+}
+
+.project-title{
+    color: #f1f1f1;
+    margin-bottom: 30px;
+}
+
+@media only screen and (max-width: 600px) {
+    .container{
+        height: 100vh;
+    }
+    
+    .form-container{
+        width: 100%;
+        background-color: var(--primary-white);
+        border-radius: 3px;
+        display: grid;
+        grid-template-columns: 100%;
+        overflow: hidden;
+    }
+
+    .button{
+        padding: 13px 45px;
+    }
+  }
+
+    </style>
+    <link rel="shortcut icon" type="image/jpg" href="favicon.jpg"/>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="inner-container" >
+            <h1 class="project-title" style=" background: linear-gradient(to right, #0000cc 0%, #f5663a 100%);">Stocks Price Prediction</h1>
+            <div class="form-container">
+                <div class="left" ></div>
+                <div class="right" style="background-color: rgba(184, 197, 253, 0.432);">
+                    <form method="post" accept-charset="utf-8" name="Modelform">
+                        <div class="input-container">
+                            <div class="from-group" id="time">
+                                <p>Select Time</p>
+                                <input type="time" class="select-control" id="time" name="time"
+                                placeholder="10:16">
+                            </div>
+                            <div class="gorm-group" id="adj_close">
+                                <p>Day of week</p>
+                                <input type="text" class="form-control" id="Day" name="Day"
+                                placeholder="01 for Monday">
+                            </div>
+                            <div class="gorm-group">
+                                <p>Opening Price</p>
+                                <input type="text" class="form-control" id="open" name="open"
+                                placeholder="1400">
+                            </div>
+                            <div class="gorm-group">
+                                <p>High</p>
+                                <input type="text" class="form-control" id="high" name="high"
+                                placeholder="1430">
+                            </div>
+                            <div class="gorm-group">
+                                <p>Low</p>
+                                <input type="text" class="form-control" id="low" name="low"
+                                placeholder="1394">
+                            </div>
+                        </div>
+                        <button class="button button-primary" onclick="send_data()">Predict</button>
+                        <div class="row">
+                            <div class="col-10" >
+                                <h4><span id="prediction"></span></h4>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="jquery.js"></script>
+    <script src="script.js"></script>
+    <script>
+        function form_handler(event) {
+                    event.preventDefault(); // Don't submit the form normally
+                }
+                function send_data()
+                {
+                    document.querySelector('form').addEventListener("submit",form_handler);
+            
+                    var fd=new FormData(document.querySelector('form'));
+            
+                    var xhr= new XMLHttpRequest({mozSystem: true});
+            
+                    xhr.open('POST','/predict',true);
+                    document.getElementById('prediction').innerHTML="Wait.....";
+                    xhr.onreadystatechange = function(){
+                        if(xhr.readyState == XMLHttpRequest.DONE && xhr.responseText=='1' ){
+                            document.getElementById('prediction').innerHTML="Graph will go up";
+                        }
+                        else if(xhr.readyState == XMLHttpRequest.DONE && xhr.responseText=='0'){
+                            document.getElementById('prediction').innerHTML="Graph will go down";
+                        }
+                        
+                    };
+            
+                    xhr.onload= function(){};
+            
+                    xhr.send(fd);
+                }
+    </script>
+</body>
+</html>
